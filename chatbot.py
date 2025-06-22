@@ -13,16 +13,17 @@ st.header("📄 PDF Chatbot (Local FLAN-T5)")
 # Sidebar for uploading PDF
 with st.sidebar:
     st.title("📚 Your Documents")
-    file = st.file_uploader("Upload a PDF file", type="pdf")
+    files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
 
 # Process the uploaded PDF
-if file is not None:
-    pdf_reader = PdfReader(file)
+if files:
     text = ""
-    for page in pdf_reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text += page_text
+    for file in files:
+        pdf_reader = PdfReader(file)
+        for page in pdf_reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text
 
     # Split text into chunks
     text_splitter = RecursiveCharacterTextSplitter(
@@ -44,6 +45,7 @@ if file is not None:
 
     # If user enters a question
     if user_question:
+       with st.spinner("Answering your question..."):
         # Search for relevant chunks
         match = vector_store.similarity_search(user_question)
 
