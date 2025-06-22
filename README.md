@@ -75,4 +75,4 @@ pip install streamlit PyPDF2 langchain langchain-community sentence-transformers
 -----------------------------------------------------------------------------------------------------------
 
 ## 📸 Screenshot
-![image](https://github.com/user-attachments/assets/32b64ed5-90ba-4a83-966f-76abd2fb0def)
+![image](chatbotmultiplefilesupport.jpeg)
